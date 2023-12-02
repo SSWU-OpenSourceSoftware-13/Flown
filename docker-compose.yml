@@ -1,21 +1,24 @@
 version: '3'
 services:
-  nodejs:
-    build:
-      context: .
-      dockerfile: Dockerfile
+  node:
+    build: .
     ports:
-      - "8031:80"
+     - "8030:80"    
+    expose:
+      - "80"   
     links:
-      - mysql-container2
+      - mysql
     depends_on:
-      - mysql-container2
+      - mysql    
 
-  mysql-container2:
-    image: mysql:latest
-    container_name: mysql-container2
+  mysql:
+    image: "mysql/mysql-server"
     ports:
-      - "3308:3307"
+      - "3306:3306"    
     environment:
       MYSQL_ROOT_PASSWORD: tjdtls!
-      MYSQL_DATABASE: flown
+      MYSQL_DATABASE: FLOWN
+      MYSQL_USER: root
+      MYSQL_PASSWORD: tjdtls! 
+    expose:
+      - "3306"
