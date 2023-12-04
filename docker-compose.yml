@@ -13,6 +13,7 @@ services:
 
   mysql:
     image: "mysql/mysql-server"
+    restart: unless-stopped
     ports:
       - "3306:3306"    
     environment:
@@ -22,3 +23,6 @@ services:
       MYSQL_PASSWORD: tjdtls! 
     expose:
       - "3306"
+    volumes:
+      - ./init/:/docker-entrypoint-initdb.d/
+      #- .flown_DV:/var/lib/mysql
